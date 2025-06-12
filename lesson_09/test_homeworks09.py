@@ -1,6 +1,6 @@
 import unittest
 
-from homeworks import sea_area, pc_price, even_sum, sum_two_value, arithmetic_mean, reverse_line
+from lesson_09.homeworks import sea_area, pc_price, even_sum, sum_two_value, arithmetic_mean, reverse_line
 
 class TestPreviousHomework(unittest.TestCase):
 
