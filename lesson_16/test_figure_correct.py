@@ -1,5 +1,5 @@
 import pytest
-from lesson_16.homework_16_2 import *
+from lesson_16.homework_16_2_correct import *
 
 class TestFigure:
 
