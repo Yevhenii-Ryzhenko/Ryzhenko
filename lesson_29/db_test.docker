@@ -1,0 +1,11 @@
+FROM python:3.10
+
+WORKDIR /app
+COPY . /app
+
+RUN pip install psycopg2 pytest
+RUN apt-get update && apt-get install -y wget \
+    && wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
+    && chmod +x wait-for-it.sh
+
+CMD ["./wait-for-it.sh", "db:5432", "-t", "60", "--", "pytest", "test_docker.py", "-v", "--disable-warnings"]
