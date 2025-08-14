@@ -11,41 +11,40 @@ pipeline {
             steps {
                 bat '''
                     rmdir /s /q venv
-            C:\\Users\\yryzh\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m venv venv
-            call venv\\Scripts\\activate.bat
-            python -m pip install --upgrade pip
-            python -m pip install -r requirements.txt
+                    C:\\Users\\yryzh\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m venv venv
+                    call venv\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
                 '''
             }
         }
-
         stage('Run tests') {
             steps {
                 bat """
-                        call venv\\Scripts\\activate.bat
-                        pytest -m "${PYTEST_MARK}" --alluredir=allure-results
-                    """
+                    call venv\\Scripts\\activate.bat
+                    pytest -m "${PYTEST_MARK}" --alluredir=allure-results
+                """
             }
         }
     }
-    post {
-    always {
-        // Генерація Allure-звіту
-        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
 
-        // Надсилання email
-        emailext body: '''Hello,
+    post {
+        always {
+            // Генерація Allure-звіту
+            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+
+            // Надсилання email
+            emailext body: '''Hello,
 
 Build ${JOB_NAME} #${BUILD_NUMBER} finished with status: ${BUILD_STATUS}.
 You can check the build details here: ${BUILD_URL}
 
 Allure report: ${BUILD_URL}allure-report''',
-            compressLog: true,
-            mimeType: 'text/html',
-            replyTo: 'y.ryzhenko@gmail.com',
-            subject: 'Build ${JOB_NAME} #${BUILD_NUMBER} - ${BUILD_STATUS}',
-            to: 'y.ryzhenko@gmail.com'
-    }
-}
+                compressLog: true,
+                mimeType: 'text/html',
+                replyTo: 'y.ryzhenko@gmail.com',
+                subject: 'Build ${JOB_NAME} #${BUILD_NUMBER} - ${BUILD_STATUS}',
+                to: 'y.ryzhenko@gmail.com'
+        }
     }
 }
