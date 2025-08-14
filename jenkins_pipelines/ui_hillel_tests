@@ -19,7 +19,7 @@ pipeline {
             steps {
                 bat '''
                     venv\\Scripts\\activate
-                    pip install -r requirements.txt
+                    "C:\Users\yryzh\AppData\Local\Programs\Python\Python313\python.exe" -m pip install -r requirements.txt
                 '''
             }
         }
