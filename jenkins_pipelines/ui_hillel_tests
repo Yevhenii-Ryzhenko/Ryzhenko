@@ -9,34 +9,32 @@ pipeline {
         }
         stage('Install dependencies') {
             steps {
-                sh '''apt-get update
-                    apt-get install -y python3 python3-dev
-                    apt install -y python3-pip
-                    rm -rf venv
-                    apt install -y python3.11-venv
-                    python3 -m venv venv '''
+                bat '''
+                    rmdir /s /q venv
+                    python -m venv venv
+                '''
             }
         }
         stage('Install requiements') {
             steps {
-                sh '''#!/bin/bash
-                    source venv/bin/activate
-                    pip install -r requirements.txt'''
+                bat '''
+                    venv\\Scripts\\activate
+                    pip install -r requirements.txt
+                '''
             }
         }
         stage('Run tests') {
             steps {
-                sh '''#!/bin/bash
-                    source venv/bin/activate
-                    pytest -m authorization --alluredir=allure-results'''
+                bat '''
+                    venv\\Scripts\\activate
+                    pytest -m authorization --alluredir=allure-results
+                '''
             }
         }
-
     }
     post {
         always {
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
         }
     }
-
 }
