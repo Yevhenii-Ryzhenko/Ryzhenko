@@ -18,6 +18,7 @@ error_massage_to_qa_about_button = 'Button "Register" is clickable, but you have
 @pytest.mark.authorization
 class TestLogInWithoutPassword:
 
+    @pytest.mark.testing_jenkins
     @allure.story('Without password')
     def test_login_user_without_password(self, driver, url, home_page, actions):
         sign_in = SignInWindow(driver, url, home_page)

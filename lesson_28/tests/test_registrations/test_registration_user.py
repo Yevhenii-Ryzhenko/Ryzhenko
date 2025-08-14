@@ -14,6 +14,7 @@ data = CrateRandomData
 @pytest.mark.registration
 class TestRegistration:
 
+    @pytest.mark.testing_jenkins
     @allure.story('Create new user')
     def test_create_new_user(self, driver, home_page, actions, url):
         register = RegistrationWindow(driver, url, home_page)
