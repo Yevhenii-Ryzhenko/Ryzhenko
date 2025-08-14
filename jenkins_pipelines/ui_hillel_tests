@@ -11,7 +11,7 @@ pipeline {
             steps {
                 bat '''
                     rmdir /s /q venv
-                    py -m venv venv
+                    "C:\Users\yryzh\AppData\Local\Programs\Python\Python313\python.exe" -m venv venv
                 '''
             }
         }
