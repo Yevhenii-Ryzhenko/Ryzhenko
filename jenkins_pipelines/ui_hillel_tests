@@ -30,21 +30,17 @@ pipeline {
 
     post {
         always {
-            // Генерація Allure-звіту
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-
-            // Надсилання email
-            emailext body: '''Hello,
-
-Build ${JOB_NAME} #${BUILD_NUMBER} finished with status: ${BUILD_STATUS}.
-You can check the build details here: ${BUILD_URL}
-
-Allure report: ${BUILD_URL}allure-report''',
-                compressLog: true,
-                mimeType: 'text/html',
-                replyTo: 'y.ryzhenko@outlook.com',
-                subject: 'Build ${JOB_NAME} #${BUILD_NUMBER} - ${BUILD_STATUS}',
-                to: 'y.ryzhenko@gmail.com'
+            emailext(
+                to: 'ryzhenko.yevhenii@gmail.com',
+                subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
+                body: """Hello!
+                <p>Build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> finished with status: <b>${currentBuild.currentResult}</b></p>
+                <p>Details: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                <p>Allure report: <a href="${env.BUILD_URL}allure">Переглянути звіт</a></p>
+                """,
+                mimeType: 'text/html'
+            )
         }
     }
 }
