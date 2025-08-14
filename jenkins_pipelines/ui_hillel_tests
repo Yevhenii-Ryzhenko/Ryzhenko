@@ -11,7 +11,7 @@ pipeline {
             steps {
                 bat '''
                     rmdir /s /q venv
-                    python -m venv venv
+                    py -m venv venv
                 '''
             }
         }
