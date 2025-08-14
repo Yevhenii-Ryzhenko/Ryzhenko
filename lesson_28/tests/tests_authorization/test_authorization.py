@@ -29,6 +29,6 @@ class TestAuthNewUser:
         logout = AuthUserPage(driver, url)
         logout.logout_auth_user()
         sign_in = SignInWindow(driver, url, home_page)
-        sign_in.login_with_existing_data(email=data.email, password=data.password)
+        sign_in.login_with_existing_data(email=email, password=data.password)
         profile_button_text = actions.get_text(AuthUserPageLocators.profile_button_locator)
         assert profile_button_text == "My profile", "You not register new user"

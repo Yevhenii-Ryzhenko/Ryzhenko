@@ -23,7 +23,7 @@ pipeline {
             steps {
                 bat """
                         call venv\\Scripts\\activate.bat
-                        python -m pytest -m authorization --alluredir=allure-results
+                        pytest -m authorization --alluredir=allure-results
                     """
             }
         }
