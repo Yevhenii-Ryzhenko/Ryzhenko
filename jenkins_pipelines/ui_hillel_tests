@@ -31,16 +31,15 @@ pipeline {
     post {
         always {
             allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            emailext(
-                to: 'evgenryzhenko@gmail.com',
-                subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
-                body: """Hello!
-                <p>Build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> finished with status: <b>${currentBuild.currentResult}</b></p>
-                <p>Details: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                <p>Allure report: <a href="${env.BUILD_URL}allure">Переглянути звіт</a></p>
-                """,
-                mimeType: 'text/html'
-            )
+            mail(
+                to: 'ryzhenko.yevhenii@gmail.com',
+                  subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
+                  body: """<p>Hello!</p>
+                  <p>Build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> finished with status: <b>${currentBuild.currentResult}</b></p>
+                  <p>Details: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                  <p>Allure report: <a href="${env.BUILD_URL}allure">Переглянути звіт</a></p>""",
+    mimeType: 'text/html'
+)
         }
     }
 }
