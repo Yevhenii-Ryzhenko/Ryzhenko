@@ -37,15 +37,13 @@ pipeline {
                   body:
                   """<html><body>
                   <p>Hello!</p>
-                  <p>Build <b>${env.JOB_NAME} #${env.BUILD_NUMBER}</b> finished with status:
-                            <span style="color:${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'};">
+                  <p>Build <b>${env.JOB_NAME}</b> with number: <b>#${env.BUILD_NUMBER}</b> finished with status:
+                            <b><span style="color:${currentBuild.currentResult == 'SUCCESS' ? 'green' : 'red'};">
                             ${currentBuild.currentResult}
-                            </span>
+                            </span></b>
                   </p>
-                  <div style="border:1px solid #ccc; padding:10px; border-radius:5px;">
-                        <p><b>Details:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                        <p><b>Allure report:</b> <a href="${env.BUILD_URL}allure">View the report</a></p>
-                  </div>
+                  <p><b>Details:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                  <p><b>Allure report:</b> <a href="${env.BUILD_URL}allure">View</a></p>
                   <p><b>Start time:</b> ${new Date(currentBuild.startTimeInMillis)}</p>
                   <p><b>Duration:</b> ${currentBuild.durationString}</p>
                   </body></html>""",
