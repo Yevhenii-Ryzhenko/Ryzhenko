@@ -42,7 +42,7 @@ You can check the build details here: ${BUILD_URL}
 Allure report: ${BUILD_URL}allure-report''',
                 compressLog: true,
                 mimeType: 'text/html',
-                replyTo: 'y.ryzhenko@gmail.com',
+                replyTo: 'y.ryzhenko@outlook.com',
                 subject: 'Build ${JOB_NAME} #${BUILD_NUMBER} - ${BUILD_STATUS}',
                 to: 'y.ryzhenko@gmail.com'
         }
