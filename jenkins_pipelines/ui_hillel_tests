@@ -26,7 +26,7 @@ pipeline {
         stage('Run tests') {
             steps {
                 bat '''
-                    venv\Scripts\python.exe -m pytest -m authorization --alluredir=allure-results
+                    venv/Scripts/python.exe -m pytest -m authorization --alluredir=allure-results
                 '''
             }
         }
