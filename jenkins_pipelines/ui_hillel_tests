@@ -29,16 +29,23 @@ pipeline {
         }
     }
     post {
-        always {
-            allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-        }
-        always {
+    always {
+        // Генерація Allure-звіту
+        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+
+        // Надсилання email
         emailext body: '''Hello,
 
 Build ${JOB_NAME} #${BUILD_NUMBER} finished with status: ${BUILD_STATUS}.
 You can check the build details here: ${BUILD_URL}
 
-Allure report: ${BUILD_URL}allure-report''', compressLog: true, mimeType: 'text/html', replyTo: 'y.ryzhenko@gmail.com', subject: 'Build ${JOB_NAME} #${BUILD_NUMBER} - ${BUILD_STATUS}', to: 'y.ryzhenko@gmail.com'
-        }
+Allure report: ${BUILD_URL}allure-report''',
+            compressLog: true,
+            mimeType: 'text/html',
+            replyTo: 'y.ryzhenko@gmail.com',
+            subject: 'Build ${JOB_NAME} #${BUILD_NUMBER} - ${BUILD_STATUS}',
+            to: 'y.ryzhenko@gmail.com'
+    }
+}
     }
 }
