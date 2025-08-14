@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh '''#!/bin/bash
                     source venv/bin/activate
-                    pytest -m "${PYTEST_MARK}" --alluredir=allure-results'''
+                    pytest -m authorization --alluredir=allure-results'''
             }
         }
 
