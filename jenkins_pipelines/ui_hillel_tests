@@ -11,18 +11,14 @@ pipeline {
             steps {
                 bat '''
                     rmdir /s /q venv
-                    "C:/Users/yryzh/AppData/Local/Programs/Python/Python313/python.exe" -m venv venv
+            C:\\Users\\yryzh\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m venv venv
+            call venv\\Scripts\\activate.bat
+            python -m pip install --upgrade pip
+            python -m pip install -r requirements.txt
                 '''
             }
         }
-        stage('Install requirements') {
-            steps {
-                bat '''
-                    call venv/Scripts/activate.bat
-                    "C:/Users/yryzh/AppData/Local/Programs/Python/Python313/python.exe" -m pip install -r requirements.txt
-                '''
-            }
-        }
+
         stage('Run tests') {
             steps {
                 bat """
