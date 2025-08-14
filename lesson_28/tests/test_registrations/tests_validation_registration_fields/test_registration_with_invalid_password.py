@@ -17,7 +17,6 @@ error_massage_to_qa_about_button = 'Button "Register" is clickable, but you have
 @pytest.mark.registration
 class TestValidationPasswordInput:
 
-    @pytest.mark.testing_jenkins
     @allure.story('Length of password')
     def test_create_user_with_invalid_password(self, driver, url, home_page, actions):
         register = RegistrationWindow(driver, url, home_page)
